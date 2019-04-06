@@ -15,23 +15,25 @@
       ]
     },
     {
-      "name": "Molecule Man",
-      "age": 29,
-      "secretIdentity": "Dan Jukes",
+      "name": "Madame Uppercut",
+      "age": 39,
+      "secretIdentity": "Jane Wilson",
       "powers": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
+        "Million ton punch",
+        "Damage Resistance",
+        "Superhuman reflexes"
       ]
     },
     {
-      "name": "Molecule Man",
-      "age": 29,
-      "secretIdentity": "Dan Jukes",
+      "name": "Eternal Flame",
+      "age": 100000,
+      "secretIdentity": "Unknown",
       "powers": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional Travel"
       ]
     }
   ]

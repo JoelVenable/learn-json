@@ -5,12 +5,12 @@ var section = document.querySelector('section');
 
 var requestURL = '../data.json';
 var request = new XMLHttpRequest();
-request.open('GET',requestURL);
+request.open('GET', requestURL);
 request.responseType = 'json';
 request.send();
 
 
-request.onload = function() {
+request.onload = function () {
   var superHeroes = request.response;
   populateHeader(superHeroes);
   showHeroes(superHeroes);
@@ -28,6 +28,41 @@ function populateHeader(jsonObj) {
 }
 
 function showHeroes(jsonObj) {
-  // do stuff
-  
+  var heroList = jsonObj['members'];
+
+  for (let i = 0; i < heroList.length; i++) {
+    const hero = heroList[i];
+    var div = document.createElement('div');
+    section.appendChild(div);
+
+
+    var heroName = document.createElement('h3'),
+     heroAge = document.createElement('p'),
+     heroIdentity = document.createElement('p');
+     heroPowers = document.createElement('ul');
+
+    heroName.textContent = hero.name;
+    div.appendChild(heroName);
+
+    heroAge.textContent = `Age: ${hero.age}`;
+    div.appendChild(heroAge);
+
+    heroIdentity.textContent = `Secret Identity: ${hero.secretIdentity}`;
+    div.appendChild(heroIdentity);
+
+    div.appendChild(heroPowers);
+    for (let i = 0; i < hero.powers.length; i++) {
+      const heroPower = hero.powers[i];
+      var power = document.createElement('li');
+      power.textContent = heroPower;
+      heroPowers.appendChild(power);
+    }
+
+
+
+
+
+
+  }
+
 }
