@@ -3,12 +3,7 @@
 var header = document.querySelector('header');
 var section = document.querySelector('section');
 
-var requestURL = '../data.json';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
+var request = fetchJsonRequest('../data.json');
 
 request.onload = function () {
   var superHeroes = request.response;
@@ -18,44 +13,44 @@ request.onload = function () {
 
 
 function populateHeader(jsonObj) {
-  var myH1 = document.createElement('h1');
-  myH1.textContent = jsonObj['squadName'];
-  header.appendChild(myH1);
-
-  var myPara = document.createElement('p');
-  myPara.textContent = `Hometown: ${jsonObj['homeTown']} // Formed: ${jsonObj['formed']}`;
-  header.appendChild(myPara);
+  addHTMLElement('h1',header, jsonObj['squadName']);
+  var subheadContent = `Hometown: ${jsonObj['homeTown']} // Formed: ${jsonObj['formed']}`;
+  addHTMLElement('p', header, subheadContent);
 }
+
 
 function showHeroes(jsonObj) {
   var heroList = jsonObj['members'];
 
   for (let i = 0; i < heroList.length; i++) {
     const hero = heroList[i];
-    var div = document.createElement('div');
-    section.appendChild(div);
+    var div = addHTMLElement('div',section,"");
 
 
-    var heroName = document.createElement('h3'),
-     heroAge = document.createElement('p'),
-     heroIdentity = document.createElement('p');
-     heroPowers = document.createElement('ul');
-
-    heroName.textContent = hero.name;
-    div.appendChild(heroName);
-
-    heroAge.textContent = `Age: ${hero.age}`;
-    div.appendChild(heroAge);
-
-    heroIdentity.textContent = `Secret Identity: ${hero.secretIdentity}`;
-    div.appendChild(heroIdentity);
-
-    div.appendChild(heroPowers);
+    addHTMLElement('h3',div,`Name: ${hero.name}`);
+    addHTMLElement('p',div,`Age: ${hero.age}`);
+    addHTMLElement('p',div,`Secret Identity: ${hero.secretIdentity}`);
+    addHTMLElement('p',div,"Special Powers:");
+    var powersList = addHTMLElement('ul',div);
     for (let i = 0; i < hero.powers.length; i++) {
-      const heroPower = hero.powers[i];
-      var power = document.createElement('li');
-      power.textContent = heroPower;
-      heroPowers.appendChild(power);
+      addHTMLElement('li',powersList,hero.powers[i]);
     }
   }
+}
+
+
+function addHTMLElement(htmlTag, parent, htmlContent) {
+  htmlElement = document.createElement(htmlTag);
+  htmlElement.textContent = htmlContent;
+  parent.appendChild(htmlElement);
+  return htmlElement;
+}
+
+
+function fetchJsonRequest(jsonURL) {
+  var request = new XMLHttpRequest();
+  request.open('GET', jsonURL);
+  request.responseType = 'json';
+  request.send();
+  return request;
 }
