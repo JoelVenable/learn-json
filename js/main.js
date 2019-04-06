@@ -57,12 +57,5 @@ function showHeroes(jsonObj) {
       power.textContent = heroPower;
       heroPowers.appendChild(power);
     }
-
-
-
-
-
-
   }
-
 }
